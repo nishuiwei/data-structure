@@ -65,6 +65,7 @@ class LinkedList {
       this.tail = curNode
     }
   }
+
   // 删除头部节点
   deleteHead() {
     if (!this.head) {
@@ -142,16 +143,85 @@ class LinkedList {
 // console.log(stack.pop())
 // console.log(stack.toArray())
 
-class Stack {
+// class Stack {
+//   constructor() {
+//     this.list = new LinkedList()
+//   }
+
+//   push(value) {
+//     this.list.prepend(value)
+//   }
+
+//   pop() {
+//     return this.list.deleteHead()
+//   }
+
+//   isEmpty() {
+//     return !this.list.head
+//   }
+
+//   toArray() {
+//     return this.list.toArray()
+//   }
+// }
+
+
+// const stack = new Stack();
+// stack.push('关闭冰箱')
+// stack.push('把大象放进冰箱')
+// stack.push('先打开冰箱')
+// console.log(stack.toArray())
+// console.log(stack.pop())
+// console.log(stack.toArray())
+// console.log(stack.pop())
+// console.log(stack.toArray())
+// console.log(stack.pop())
+// console.log(stack.toArray())
+
+
+// class Queue {
+//   constructor() {
+//     this.items = []
+//   }
+
+//   enqueue(value) {
+//     this.items.unshift(value)
+//   }
+
+//   dequeue() {
+//     return this.items.pop()   
+//   }
+
+//   isEmpty() {
+//     return this.items.length === 0
+//   }
+
+//   toArray() {
+//     return this.items.slice()
+//   }
+// }
+
+// const queue = new Queue();
+// queue.enqueue('第一号')
+// queue.enqueue('第二号')
+// queue.enqueue('第三号')
+// console.log(queue.toArray())
+// console.log(queue.dequeue())
+// console.log(queue.toArray())
+// console.log(queue.dequeue())
+// console.log(queue.toArray())
+// console.log(queue.dequeue())
+// console.log(queue.toArray())
+
+class Queue {
   constructor() {
-    this.list = new LinkedList()
+    this.list = new LinkedList();
+  }
+  enqueue(value) {
+    this.list.append(value)
   }
 
-  push(value) {
-    this.list.prepend(value)
-  }
-
-  pop() {
+  dequeue() {
     return this.list.deleteHead()
   }
 
@@ -165,14 +235,14 @@ class Stack {
 }
 
 
-const stack = new Stack();
-stack.push('关闭冰箱')
-stack.push('把大象放进冰箱')
-stack.push('先打开冰箱')
-console.log(stack.toArray())
-console.log(stack.pop())
-console.log(stack.toArray())
-console.log(stack.pop())
-console.log(stack.toArray())
-console.log(stack.pop())
-console.log(stack.toArray())
+const queue = new Queue();
+queue.enqueue('第一号')
+queue.enqueue('第二号')
+queue.enqueue('第三号')
+console.log(queue.toArray())
+console.log(queue.dequeue())
+console.log(queue.toArray())
+console.log(queue.dequeue())
+console.log(queue.toArray())
+console.log(queue.dequeue())
+console.log(queue.toArray())
