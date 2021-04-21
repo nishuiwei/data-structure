@@ -213,36 +213,67 @@ class LinkedList {
 // console.log(queue.dequeue())
 // console.log(queue.toArray())
 
-class Queue {
-  constructor() {
-    this.list = new LinkedList();
-  }
-  enqueue(value) {
-    this.list.append(value)
-  }
+// class Queue {
+//   constructor() {
+//     this.list = new LinkedList();
+//   }
+//   enqueue(value) {
+//     this.list.append(value)
+//   }
 
-  dequeue() {
-    return this.list.deleteHead()
-  }
+//   dequeue() {
+//     return this.list.deleteHead()
+//   }
 
-  isEmpty() {
-    return !this.list.head
-  }
+//   isEmpty() {
+//     return !this.list.head
+//   }
 
-  toArray() {
-    return this.list.toArray()
+//   toArray() {
+//     return this.list.toArray()
+//   }
+// }
+
+
+// const queue = new Queue();
+// queue.enqueue('第一号')
+// queue.enqueue('第二号')
+// queue.enqueue('第三号')
+// console.log(queue.toArray())
+// console.log(queue.dequeue())
+// console.log(queue.toArray())
+// console.log(queue.dequeue())
+// console.log(queue.toArray())
+// console.log(queue.dequeue())
+// console.log(queue.toArray())
+
+
+const words = 'helloworld'
+
+// 双重 for 循环
+function findFirst(str) {
+  for(let i = 0; i < str.length; i++) {
+    for(let j = i + 1; j < str.length; j++) {
+      if(str[i] === str[j]){
+        return str[i]
+      }
+    }
   }
 }
 
+// 大 O 符号 O(n^2)
+console.log(findFirst(words))
 
-const queue = new Queue();
-queue.enqueue('第一号')
-queue.enqueue('第二号')
-queue.enqueue('第三号')
-console.log(queue.toArray())
-console.log(queue.dequeue())
-console.log(queue.toArray())
-console.log(queue.dequeue())
-console.log(queue.toArray())
-console.log(queue.dequeue())
-console.log(queue.toArray())
+// 通过对象 ( 哈希表 ) 
+function findFirstRep(str) {
+  const table = {}
+  for(const word of str) {
+    if(table[word]) {
+      return word
+    }
+    table[word] = 1
+  }
+}
+
+// 大 O 符号 O(n)
+console.log(findFirstRep(words))
