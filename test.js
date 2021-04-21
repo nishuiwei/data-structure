@@ -250,30 +250,90 @@ class LinkedList {
 
 const words = 'helloworld'
 
-// 双重 for 循环
-function findFirst(str) {
-  for(let i = 0; i < str.length; i++) {
-    for(let j = i + 1; j < str.length; j++) {
-      if(str[i] === str[j]){
-        return str[i]
+// // 双重 for 循环
+// function findFirst(str) {
+//   for(let i = 0; i < str.length; i++) {
+//     for(let j = i + 1; j < str.length; j++) {
+//       if(str[i] === str[j]){
+//         return str[i]
+//       }
+//     }
+//   }
+// }
+
+// // 大 O 符号 O(n^2)
+// console.log(findFirst(words))
+
+// // 通过对象 ( 哈希表 ) 
+// function findFirstRep(str) {
+//   const table = {}
+//   for(const word of str) {
+//     if(table[word]) {
+//       return word
+//     }
+//     table[word] = 1
+//   }
+// }
+
+// // 大 O 符号 O(n)
+// console.log(findFirstRep(words))
+
+class HashTable {
+  constructor() {
+    this.size = 16
+    this.buckets = Array(16).fill(null)
+  }
+
+  hash(key) {
+    let hash = 0;
+    for (const char of key) {
+      hash += char.charCodeAt(0)
+    }
+    // console.log(hash % this.size)
+    return hash % this.size
+  }
+
+  set(key, value) {
+    const keyHash = this.hash(key)
+    this.buckets[keyHash] = value
+  }
+
+  get(key) {
+    const keyHash = this.hash(key)
+    return this.buckets[keyHash]
+  }
+
+  showInfo() {
+    for(const key of this.buckets) {
+      if(this.buckets[key] !== null) {
+        console.log(key)
       }
+      // console.log(key)
+      // console.log(this.buckets[key])
+      // console.log(key, this.buckets[key])
     }
   }
 }
 
-// 大 O 符号 O(n^2)
-console.log(findFirst(words))
-
-// 通过对象 ( 哈希表 ) 
-function findFirstRep(str) {
-  const table = {}
-  for(const word of str) {
-    if(table[word]) {
-      return word
-    }
-    table[word] = 1
-  }
+const table = new HashTable();
+for(const char of 'abcde') {
+  table.set(char, char)
 }
+for(const char of 'fijkl') {
+  table.set(char, char)
+}
+for(const char of 'qwprt') {
+  table.set(char, char)
+}
+table.showInfo()
+// function findFirstRep(str) {
+//   const table = new HashTable()
+//   for (const word of str) {
+//     if (table.get(word)) {
+//       return word
+//     }
+//     table.set(word, 1)
+//   }
+// }
 
-// 大 O 符号 O(n)
-console.log(findFirstRep(words))
+// console.log(findFirstRep(words))
