@@ -248,7 +248,6 @@ class LinkedList {
 // console.log(queue.toArray())
 
 
-const words = 'helloworld'
 
 // // 双重 for 循环
 // function findFirst(str) {
@@ -278,54 +277,56 @@ const words = 'helloworld'
 // // 大 O 符号 O(n)
 // console.log(findFirstRep(words))
 
-class HashTable {
-  constructor() {
-    this.size = 16
-    this.buckets = Array(16).fill(null)
-  }
+// class HashTable {
+//   constructor() {
+//     this.size = 16
+//     this.buckets = Array(16).fill(null)
+//   }
 
-  hash(key) {
-    let hash = 0;
-    for (const char of key) {
-      hash += char.charCodeAt(0)
-    }
-    // console.log(hash % this.size)
-    return hash % this.size
-  }
+//   hash(key) {
+//     let hash = 0;
+//     for (const char of key) {
+//       hash += char.charCodeAt(0)
+//     }
+//     // console.log(`${hash % this.size} --> ${key}`)
+//     return hash % this.size
+//   }
 
-  set(key, value) {
-    const keyHash = this.hash(key)
-    this.buckets[keyHash] = value
-  }
+//   set(key, value) {
+//     const keyHash = this.hash(key)
+//     this.buckets[keyHash] = value
+//     // console.log(this.buckets)
+//   }
 
-  get(key) {
-    const keyHash = this.hash(key)
-    return this.buckets[keyHash]
-  }
+//   get(key) {
+//     const keyHash = this.hash(key)
+//     return this.buckets[keyHash]
+//   }
 
-  showInfo() {
-    for(const key of this.buckets) {
-      if(this.buckets[key] !== null) {
-        console.log(key)
-      }
-      // console.log(key)
-      // console.log(this.buckets[key])
-      // console.log(key, this.buckets[key])
-    }
-  }
-}
+//   showInfo() {
+//     // console.log(this.buckets)
+//     for(let i = 0; i < this.buckets.length; i++) {
+//       // console.log(i, this.buckets[i])
+//       if(this.buckets[i] !== null && this.buckets[i] !== undefined) {
+//         console.log(i, this.buckets[i])
+//       }
+//     }
+//   }
+// }
+// const words = 'heelloworld'
 
-const table = new HashTable();
-for(const char of 'abcde') {
-  table.set(char, char)
-}
-for(const char of 'fijkl') {
-  table.set(char, char)
-}
-for(const char of 'qwprt') {
-  table.set(char, char)
-}
-table.showInfo()
+// const table = new HashTable();
+// for(const char of 'abcde') {
+//   console.log(char, char)
+//   table.set(char, char)
+// }
+// for(const char of 'fijkl') {
+//   table.set(char, char)
+// }
+// for(const char of 'mnopqwer') {
+//   table.set(char, char)
+// }
+// table.showInfo()
 // function findFirstRep(str) {
 //   const table = new HashTable()
 //   for (const word of str) {
@@ -337,3 +338,63 @@ table.showInfo()
 // }
 
 // console.log(findFirstRep(words))
+
+class HashTable {
+  constructor() {
+    this.size = 16
+    this.buckets = Array(16).fill(null).map(() => [])
+  }
+
+  hash(key) {
+    let hash = 0;
+    for (const char of key) {
+      hash += char.charCodeAt(0)
+    }
+    return hash % this.size
+  }
+
+  set(key, value) {
+    const keyHash = this.hash(key)
+    const bucketArray = this.buckets[keyHash]
+    const storedElement = bucketArray.find((ele) => {
+      return ele.key === key
+    })
+    if (storedElement) {
+      storedElement.val = value
+    } else {
+      bucketArray.push({ key: key, val: value })
+    }
+  }
+
+  get(key) {
+    const keyHash = this.hash(key)
+    const bucketArray = this.buckets[keyHash]
+    const storedElement = bucketArray.find((ele) => {
+      return ele.key === key
+    })
+    return storedElement
+  }
+
+  showInfo() {
+    for (let i = 0; i < this.buckets.length; i++) {
+      if (this.buckets[i] !== null && this.buckets[i] !== undefined) {
+        console.log(i, this.buckets[i])
+      }
+    }
+  }
+}
+
+const words = 'heelloworld'
+
+const table = new HashTable();
+for(const char of 'abcde') {
+  console.log(char, char)
+  table.set(char, char)
+}
+for(const char of 'fijkl') {
+  table.set(char, char)
+}
+for(const char of 'mnopqwer') {
+  table.set(char, char)
+}
+table.showInfo()
